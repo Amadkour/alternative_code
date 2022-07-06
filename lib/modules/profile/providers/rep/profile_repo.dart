@@ -22,7 +22,6 @@ class MyProfileRepo extends ProfileRepo {
                     'image': e.filePath
                   })
               .toList());
-
       return persons;
     } else {
       return response

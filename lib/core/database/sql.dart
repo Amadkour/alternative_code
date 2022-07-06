@@ -15,7 +15,7 @@ class SqlDb {
 
   initialDb() async {
     String databasepath = await getDatabasesPath();
-    String path = join(databasepath, 'ree.db');
+    String path = join(databasepath, 'popular.db');
 
     Database mydb = await openDatabase(path, version: 3, onCreate: _onCreate);
     return mydb;
@@ -43,8 +43,6 @@ class SqlDb {
   ///Example to get reade data ( await db.readData('tableName') )
   readData(String tableName, {id,limit}) async {
     Database mydb = await db;
-    print(
-        "-----------------------( Database ReadData )--------------------->DB($tableName)");
     List<Map>? response;
     try {
       response =
