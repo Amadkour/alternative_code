@@ -14,8 +14,8 @@ class SqlDb {
   }
 
   initialDb() async {
-    String databasepath = await getDatabasesPath();
-    String path = join(databasepath, 'popular.db');
+    String databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'popular.db');
 
     Database mydb = await openDatabase(path, version: 3, onCreate: _onCreate);
     return mydb;
@@ -43,10 +43,12 @@ class SqlDb {
   ///Example to get reade data ( await db.readData('tableName') )
   readData(String tableName, {id,limit}) async {
     Database mydb = await db;
+    print(
+        "-----------------------( Database ReadData )--------------------->DB($tableName)");
     List<Map>? response;
     try {
       response =
-          await mydb.query(tableName, where: id == null ? null : 'id = $id',limit:limit );
+      await mydb.query(tableName, where: id == null ? null : 'id = $id',limit:limit );
     } catch (e) {
       print(e);
     }
@@ -58,7 +60,7 @@ class SqlDb {
     Database mydb = await db;
     for (Map element in data) {
       await mydb.rawInsert(
-          "INSERT INTO $tableName VALUES('${element.values.join("','")}')");
+          "INSERT INTO $tableName VALUES(\"${element.values.join('","')}\")");
     }
     mydb.close();
   }
